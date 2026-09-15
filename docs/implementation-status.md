@@ -32,6 +32,16 @@ Date: 2026-09-15. This report supersedes the earlier asset-transfer blocker; the
 | 26. Commit | `feat: implement Miqwad header and hero`; based on `55c1e86`. This commit does not certify visual completion. |
 | 27. Push | Not performed in this commit-only follow-up; browser validation remains pending. |
 
+## Visual polish follow-up
+
+Baseline: `cb5c0b2a87d8961528a0d097d66bb5fa7a1502bb`; branch: `feat/header-hero`.
+
+- Replaced only the scrolled Header's brand-blue surface with white at 3% opacity. Retained the 8px backdrop blur and very light white 10% bottom border. Top state and mobile menu are unchanged; foreground content has no blur filter. The transparent surface naturally shows the underlying Hero colors without adding a blue tint of its own.
+- Scaled the existing phone composition to 104% from its top center and translated it down 12px. The same stage dimensions, crop positions and rotation are retained. A clipped, masked artwork wrapper permits a 20px soft overlap beyond the Hero onto the existing white page background; the background image and existing Hero fade are unchanged.
+- `npm run typecheck`, `npm run lint`, and `npm run build`: PASS after the refinement.
+- Production server started successfully. Browser access to the local preview failed with `net::ERR_BLOCKED_BY_CLIENT`. Visual review at 1280px and 440px, top/scrolled appearance, border subtlety, overlap, and overflow remain unverified; no visual-completion claim is made.
+- User explicitly requested exactly one refinement commit. No push or merge.
+
 ## Verification and follow-up
 
 No new dependency, generic replacement artwork, additional marketing section, or remote Figma URL was introduced. The original PNG artwork retains transparency and dimensions; Next Image provides responsive delivery. Background is eager/high priority; content and artwork reserve layout space. Temporary preview harness was removed.
