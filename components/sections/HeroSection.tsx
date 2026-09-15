@@ -13,8 +13,8 @@ export function HeroSection() {
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <Image src="/images/hero/car-interior.png" alt="" fill sizes="100vw" loading="eager" fetchPriority="high" className="object-cover object-center opacity-20" />
         <div className="absolute inset-0 bg-black/20" />
-        <div className="hero-glow absolute inset-x-0 bottom-0 h-[517px] md:h-[291px]" />
-        <div className="hero-fade absolute inset-x-0 bottom-0 h-[348px] md:h-[90px]" />
+        <div className="hero-fade absolute inset-x-0 bottom-0 h-[clamp(18rem,79.1vw,21.75rem)] md:h-[90px]" />
+        <div className="absolute inset-x-0 bottom-0 h-[54%] bg-[radial-gradient(ellipse_85%_89%_at_50%_65%,rgb(255_255_255_/_0.15),transparent_68%)] md:h-[42%] md:bg-[radial-gradient(ellipse_28%_100%_at_50%_100%,rgb(255_255_255_/_0.12),transparent_80%)]" />
       </div>
       <div className="relative px-5 pt-[213px] md:pt-[194px]">
         <h1 id="hero-title" className="pb-[12.5px] text-[32px] leading-[46.5px] font-bold">{siteConfig.title}</h1>
@@ -27,10 +27,13 @@ export function HeroSection() {
           })}
         </div>
       </div>
-      {/* Reserve the complete transformed artwork bounds in normal flow. */}
-      <div aria-hidden="true" className="relative mx-auto mt-[93px] aspect-[440/454] w-full max-w-[440px] md:mt-[45px] md:aspect-[426/466] md:max-w-[426px]">
-        <div className="absolute inset-0 origin-top translate-y-2 scale-[1.04]">
-          <Image src="/images/hero/phones.png" alt="" width={2017} height={2048} sizes="444px" className="hidden h-auto w-full md:block" />
+      {/* Mobile reserves complete devices; desktop reserves the reference bottom region.
+          Only the outer Hero boundary crops the desktop artwork. */}
+      <div aria-hidden="true" className="relative mx-auto mt-[93px] aspect-[440/454] w-full max-w-[440px] md:mt-[45px] md:aspect-[426/281] md:max-w-[426px]">
+        <div className="absolute inset-x-0 bottom-0 hidden aspect-[426/281] origin-top translate-y-2 scale-[1.04] md:block">
+          <Image src="/images/hero/phones.png" alt="" width={2017} height={2048} sizes="444px" className="h-auto w-full" />
+        </div>
+        <div className="absolute inset-0 origin-top translate-y-2 scale-[1.04] md:hidden">
           {/* These polygons separate the two devices through transparent pixels,
               retaining their complete silhouettes and intrinsic perspective. */}
           <Image src="/images/hero/phones.png" alt="" width={2017} height={2048} sizes="(max-width: 440px) 90vw, 396px" className="absolute top-0 left-[8.636%] h-auto w-[86.34%] max-w-none [clip-path:polygon(0_0,49%_0,49%_70%,44%_100%,0_100%)] md:hidden" />

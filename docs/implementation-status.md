@@ -64,6 +64,17 @@ Baseline: `b229ecbfda9234961ef62cfa01403dd18ee3a8ee`.
 - Actual browser preview remains blocked by `ERR_BLOCKED_BY_CLIENT`. Visual matching, background crop, text wrapping and rendered overflow require local QA; no browser approval is claimed.
 - Exactly one requested commit and an external Git bundle export; no push, merge, rebase or next-section implementation.
 
+## Responsive bottom composition — current correction
+
+- The preceding desktop stage changed from 281px to 466px at its reference width to expose complete devices, adding 185px to the Hero. User has now explicitly approved the Figma desktop boundary crop instead.
+- Restored the desktop bottom-region ratio to 426:281. Content remains in normal flow, giving approximately 692px Hero height at 1280px without a fixed Hero width/height. Desktop artwork is anchored with `bottom-0` inside this final region; its intrinsic image height can extend internally. Scale remains 104%, displacement 8px. Only the outer Hero shell crops the intended lower portions; no inner desktop clipping, opacity mask, or foreground fade is used.
+- Desktop/mobile positioning wrappers are now distinct. Mobile retains its 440:454 stage, full device silhouettes, independent offsets and approximately 956px Hero at 440/446px when subtitle fits one line. Narrower widths allow text wrapping. Header and badge order remain unchanged.
+- Lower multi-stop fade stays behind phones, flush with the Hero bottom: mobile height scales with viewport width up to 348px; desktop uses its separate 90px region. Radial glow is composed after the background fade, still behind artwork, restoring atmospheric light without fading screens or adding a rectangular patch. Glow placement/shape differs by breakpoint.
+- Layout reasoning covers 375, 390, 440, 446, 768, 1024, 1280 and 1440px. Mobile device bounds remain inside their stage; desktop bottom crop is intentional and sides remain inside the viewport. No next section was introduced.
+- `npm run typecheck`: PASS. `npm run lint`: PASS. `npm run build`: PASS. `git diff --check`: PASS.
+- Production preview started, but browser access again returned `ERR_BLOCKED_BY_CLIENT`. No rendered width, overflow, or visual approval is claimed; desktop crop and mobile glow require local QA.
+- One requested commit: `fix: align hero bottom composition across breakpoints`; verified bundle exported outside the repository. No push, merge or rebase.
+
 ## Verification and follow-up
 
 No new dependency, generic replacement artwork, additional marketing section, or remote Figma URL was introduced. The original PNG artwork retains transparency and dimensions; Next Image provides responsive delivery. Background is eager/high priority; content and artwork reserve layout space. Temporary preview harness was removed.
