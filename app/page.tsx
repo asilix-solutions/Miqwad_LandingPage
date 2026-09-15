@@ -1,5 +1,6 @@
-// Header + Hero await local copies of the exact Figma assets.
-// This foundation route is intentionally empty, not a substitute design.
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { HeroSection } from "@/components/sections/HeroSection";
+
 export default function Home() {
-  return <main id="main-content" aria-label="مقود" />;
+  return <><SiteHeader /><main id="main-content" tabIndex={-1}><HeroSection /></main></>;
 }

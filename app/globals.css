@@ -26,3 +26,21 @@
     outline-offset: 4px;
   }
 }
+
+/* Decorative composition only; content and controls remain in normal flow. */
+@layer components {
+  .hero-glow {
+    background: radial-gradient(ellipse 374px 460px at 50% 89%, rgb(255 255 255 / 15%), transparent 67.456%);
+  }
+  .hero-fade {
+    background: linear-gradient(to bottom, transparent 32%, rgb(0 27 60 / 49%) 46%, rgb(1 18 42 / 78%) 63%, rgb(1 18 42 / 97%) 81%, #01122a);
+  }
+  @media (min-width: 768px) {
+    .hero-glow {
+      background: linear-gradient(to top, rgb(255 255 255 / 12%), transparent 80%);
+      max-width: 340px;
+      margin-inline: auto;
+    }
+    .hero-fade { background: linear-gradient(to bottom, transparent, #011c3e); }
+  }
+}

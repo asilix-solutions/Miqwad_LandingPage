@@ -1,4 +1,48 @@
-# Foundation + Header + Hero — incomplete
+# Header + Hero — implemented, browser validation pending
+
+Date: 2026-09-15. This report supersedes the earlier asset-transfer blocker; the historical foundation report is retained below.
+
+| Requested report item | Result |
+| --- | --- |
+| 1. Repository | `asilix-solutions/Miqwad_LandingPage`; origin verified. No other repository used. |
+| 2. Base commit | `55c1e86cc3831efb8021487cefd6944054248d6e` on `origin/main`. |
+| 3. Working branch | `feat/header-hero`. |
+| 4. Assets identified | Four reference screenshots, original interior photo, white vector logo, three duplicate raster phone wrappers, duplicate inline store vectors. See source map. |
+| 5. Production assets | `public/brand/miqwad-white.svg`, `public/brand/miqwad-blue.svg`, `public/images/hero/car-interior.png`, `public/images/hero/phones.png`, `public/store-badges/app-store.svg`, `public/store-badges/google-play.svg`. |
+| 6. Header | `components/layout/SiteHeader.tsx`; fixed overlay, logo right, navigation center, CTA left; mobile at widths below 768px. |
+| 7. Mobile menu | `components/layout/MobileNavigation.tsx`; white disclosure panel, blue logo, dividers, orange CTA. Named native trigger with expanded/controls states; Escape restores trigger focus; closes on navigation, outside pointer, focus leaving Header, and desktop resize. Tall-menu overflow is scrollable on short viewports. These interactions are implemented but not browser-verified. |
+| 8. Hero | `components/sections/HeroSection.tsx`, composed from `app/page.tsx`; semantic h1/copy, store artwork, local car/phone assets. |
+| 9. Scroll approach | Passive listener with 8px threshold; only sets boolean state when the threshold result changes. Cleanup on unmount. |
+| 10. Surface/blur | At top: transparent. Scrolled: existing brand at 75% opacity, 8px backdrop blur, subtle white border. No foreground filter or shadow. 200ms visual-property transition; reduced motion disables it. |
+| 11. Responsive approach | Flow-based content, max-width Header and artwork stages; desktop combined phones, separately cropped/rotated mobile phones; aspect ratios and percentage positions only within decorative stage. Local fonts and existing Tailwind tokens retained. |
+| 12. Widths visually checked | None. Required 375, 390, 440, 768, 1024, 1280, 1440 remain pending in an accessible browser. |
+| 13. Desktop Header comparison | Reference inspected; browser comparison not performed. |
+| 14. Desktop Hero comparison | Reference inspected; browser comparison not performed. |
+| 15. Mobile Hero comparison | Reference inspected; browser comparison not performed. |
+| 16. Mobile menu comparison | Reference inspected; browser comparison not performed. |
+| 17. Header top | Implemented, not browser-verified. |
+| 18. Header scrolled | Implemented, not browser-verified. |
+| 19. Return to top | Implemented, not browser-verified. |
+| 20. Typecheck | PASS (`next typegen` and strict TypeScript). |
+| 21. Lint | PASS. |
+| 22. Production build | PASS, home statically prerendered. |
+| 23. Runtime/browser | Production server starts with explicit loopback hostname. Browser navigation to local preview returned `net::ERR_BLOCKED_BY_CLIENT`; no console, hydration, missing-resource, keyboard or overflow browser assertion is claimed. |
+| 24. Remaining differences | Visual match remains unmeasured, especially crop/gradient/phone alignment and intermediate widths. Blue logo is a fill-only derivative; menu and close are CSS strokes because separate original icon exports were not supplied. Store destinations remain null; Services/How It Works labels have no fake links. |
+| 25. Git status | The user explicitly authorized committing the current implementation despite pending browser validation. Commit is local on `feat/header-hero`; no main changes, PR or merge. |
+| 26. Commit | `feat: implement Miqwad header and hero`; based on `55c1e86`. This commit does not certify visual completion. |
+| 27. Push | Not performed in this commit-only follow-up; browser validation remains pending. |
+
+## Verification and follow-up
+
+No new dependency, generic replacement artwork, additional marketing section, or remote Figma URL was introduced. The original PNG artwork retains transparency and dimensions; Next Image provides responsive delivery. Background is eager/high priority; content and artwork reserve layout space. Temporary preview harness was removed.
+
+To finish this phase: run the production site in a browser that can access it, compare all four reference images, review every requested width and keyboard interaction, check actual assets/console/hydration/overflow, tune visual differences, then rerun static checks and commit/push only `feat/header-hero`. For scroll QA on the isolated 692px desktop Hero, use a viewport shorter than the Hero rather than adding out-of-scope page content.
+
+The production runtime in this environment requires `npm run start -- --hostname 127.0.0.1 --port 3002`; the default host discovery reported an OS network-interface error. No application configuration was changed to work around that environment issue.
+
+---
+
+# Earlier foundation report (historical)
 
 Date: 2026-09-14.
 
