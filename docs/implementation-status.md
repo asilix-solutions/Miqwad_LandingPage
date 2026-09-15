@@ -50,6 +50,20 @@ Baseline: `cb5c0b2a87d8961528a0d097d66bb5fa7a1502bb`; branch: `feat/header-hero`
 - Available desktop 1280 × 692 and mobile 440 × 956 reference images were inspected. No new measurement attachment was available in this turn. Browser preview again returned `net::ERR_BLOCKED_BY_CLIENT`; rendered visual matching, responsive overflow, and top/scrolled appearance remain unverified.
 - `npm run typecheck`, `npm run lint`, `npm run build`: PASS. Changes left uncommitted as requested; no push, merge, or rebase.
 
+## Final layering and mobile composition refinement
+
+Baseline: `b229ecbfda9234961ef62cfa01403dd18ee3a8ee`.
+
+- Diagnosis: no `mask-image` remained at this baseline. The final foreground `.hero-fade` covered the phones; nested mobile rectangular viewports clipped device silhouettes. The outer Hero and an additional artwork wrapper both clipped overflow. The opaque Hero background did not expose a following white section through a mask.
+- Background photography, black overlay, glow and bottom fade now share one clipped background layer behind real content and phones. No fade or opacity mask is applied to the artwork. The Hero remains bounded; its artwork stage reserves the complete transformed image bounds.
+- Mobile: replaced crop boxes and redundant added rotation with two original-image layers isolated through the source's transparent gap, retaining native perspective. An alpha-pixel check confirms the separating polygons exclude zero nontransparent pixels from either device. Retained the mobile aspect-ratio stage, 4% enlargement, 8px downward shift and reference spacing. Subtitle has a centered 400px maximum width; its 20px font can wrap naturally at 375/390px without forced nowrap.
+- Badge row explicitly uses LTR visual flow: Google Play left, App Store right on mobile and desktop. Page RTL, badge SVGs, header and mobile navigation are unchanged.
+- Desktop containment trade-off: complete phones at their existing scale/top position need a 466px stage rather than the former 281px crop. The desktop Hero is therefore about 185px taller, and the cover-photo crop changes with its height. This prioritizes the explicit intact-phone requirement; the resulting desktop composition requires local approval and is not claimed equivalent to the previously approved cropped composition.
+- Calculated artwork bounds fit at 375, 390, 440, 446, 768, 1024, 1280 and 1440px. At 440px, mobile artwork ends about 427px into its 454px stage; desktop ends about 458px into its 466px stage. These are geometric checks, not browser overflow assertions.
+- `npm run typecheck`: PASS. `npm run lint`: PASS. `npm run build`: PASS.
+- Actual browser preview remains blocked by `ERR_BLOCKED_BY_CLIENT`. Visual matching, background crop, text wrapping and rendered overflow require local QA; no browser approval is claimed.
+- Exactly one requested commit and an external Git bundle export; no push, merge, rebase or next-section implementation.
+
 ## Verification and follow-up
 
 No new dependency, generic replacement artwork, additional marketing section, or remote Figma URL was introduced. The original PNG artwork retains transparency and dimensions; Next Image provides responsive delivery. Background is eager/high priority; content and artwork reserve layout space. Temporary preview harness was removed.
