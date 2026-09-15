@@ -42,6 +42,14 @@ Baseline: `cb5c0b2a87d8961528a0d097d66bb5fa7a1502bb`; branch: `feat/header-hero`
 - Production server started successfully. Browser access to the local preview failed with `net::ERR_BLOCKED_BY_CLIENT`. Visual review at 1280px and 440px, top/scrolled appearance, border subtlety, overlap, and overflow remain unverified; no visual-completion claim is made.
 - User explicitly requested exactly one refinement commit. No push or merge.
 
+## Phone containment correction (current, uncommitted)
+
+- Removed the previous 20px overflow extension and its extra edge mask. The artwork wrapper now uses `absolute inset-0 overflow-hidden` within the existing responsive, aspect-ratio stage; the Hero again clips overflow on both axes. Following content no longer shares an overflowing phone layer.
+- Retained 104% artwork scale and the existing rotations/crops. Reduced the downward translation from 12px to 8px, still slightly below the original implementation. Hero height, internal flow spacing, background, glow and foreground fade are unchanged.
+- Scrolled Header retains neutral white at 3% opacity and 8px backdrop blur. Its 1px bottom border is now exactly `#A6AABF` at 30% opacity. Top transparency and mobile menu behavior are unchanged.
+- Available desktop 1280 × 692 and mobile 440 × 956 reference images were inspected. No new measurement attachment was available in this turn. Browser preview again returned `net::ERR_BLOCKED_BY_CLIENT`; rendered visual matching, responsive overflow, and top/scrolled appearance remain unverified.
+- `npm run typecheck`, `npm run lint`, `npm run build`: PASS. Changes left uncommitted as requested; no push, merge, or rebase.
+
 ## Verification and follow-up
 
 No new dependency, generic replacement artwork, additional marketing section, or remote Figma URL was introduced. The original PNG artwork retains transparency and dimensions; Next Image provides responsive delivery. Background is eager/high priority; content and artwork reserve layout space. Temporary preview harness was removed.

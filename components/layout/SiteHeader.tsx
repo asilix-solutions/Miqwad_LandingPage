@@ -45,7 +45,7 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header ref={headerRef} onBlur={(event) => { if (open && !event.currentTarget.contains(event.relatedTarget)) setOpen(false); }} data-scrolled={scrolled} data-menu-open={open} className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,backdrop-filter,border-color] duration-200 motion-reduce:transition-none ${open ? "max-h-dvh overflow-y-auto border-transparent bg-surface text-brand" : scrolled ? "border-white/10 bg-white/[0.03] text-white backdrop-blur-[8px]" : "border-transparent bg-transparent text-white"}`}>
+    <header ref={headerRef} onBlur={(event) => { if (open && !event.currentTarget.contains(event.relatedTarget)) setOpen(false); }} data-scrolled={scrolled} data-menu-open={open} className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,backdrop-filter,border-color] duration-200 motion-reduce:transition-none ${open ? "max-h-dvh overflow-y-auto border-transparent bg-surface text-brand" : scrolled ? "border-[#A6AABF]/30 bg-white/[0.03] text-white backdrop-blur-[8px]" : "border-transparent bg-transparent text-white"}`}>
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:right-2 focus:z-10 focus:rounded-control focus:bg-white focus:p-3 focus:text-brand">تخطي إلى المحتوى</a>
       <div className="mx-auto flex h-[67px] max-w-site items-center justify-between px-8 md:h-[101px] md:px-0 min-[768px]:max-[1137px]:mx-8">
         <a href="#hero" aria-label="مقود — الرئيسية" onClick={() => setOpen(false)}>
