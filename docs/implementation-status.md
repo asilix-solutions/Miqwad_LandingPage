@@ -84,6 +84,15 @@ Baseline: `b229ecbfda9234961ef62cfa01403dd18ee3a8ee`.
 - `npm run typecheck`: PASS. `npm run lint`: PASS. `npm run build`: PASS. Browser preview returned `ERR_BLOCKED_BY_CLIENT`; rendered comparison and final visual approval remain with local QA.
 - Exactly one requested commit and a verified external bundle export. No push, merge or rebase.
 
+## Desktop Rectangle 1169 foreground correction
+
+- Previous equivalent fade was inside the background stacking context (`z-index: -10`), so it could not overlay phones. It is now mobile-only; desktop uses a separate foreground layer.
+- Desktop order: background/overlays (-10), phone composition (0), Rectangle 1169 equivalent (10), real copy and badges (20). Header is untouched. All new stacking overrides are `md:` only.
+- Reproduced the vertical flip as `linear-gradient(to top, #011C3E -0.84%, rgba(0,26,59,0) 22.53%)`. The bottom-aligned, full-width overlay occupies 78.6% of Hero height (approximately 544px at the reference Hero height). It is absolute, aria-hidden, pointer-events-none and hidden below the desktop breakpoint; it neither adds height nor blocks interactions.
+- Phone position, size, transforms, Hero height, clipping, photography and glow are unchanged. Source comparison confirms phone markup is identical. Mobile base classes and its background fade remain unchanged; no Header or navigation file was edited.
+- `npm run typecheck`: PASS. `npm run lint`: PASS. `npm run build`: PASS. No new browser comparison was performed; prior local-preview access was blocked by `ERR_BLOCKED_BY_CLIENT`, so visual approval is not claimed.
+- One requested commit and verified bundle export only; no push, merge or rebase.
+
 ## Verification and follow-up
 
 No new dependency, generic replacement artwork, additional marketing section, or remote Figma URL was introduced. The original PNG artwork retains transparency and dimensions; Next Image provides responsive delivery. Background is eager/high priority; content and artwork reserve layout space. Temporary preview harness was removed.

@@ -13,10 +13,10 @@ export function HeroSection() {
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <Image src="/images/hero/car-interior.png" alt="" fill sizes="100vw" loading="eager" fetchPriority="high" className="object-cover object-center opacity-20" />
         <div className="absolute inset-0 bg-black/20" />
-        <div className="hero-fade absolute inset-x-0 bottom-0 h-[clamp(18rem,79.1vw,21.75rem)] md:h-[90px]" />
+        <div className="hero-fade absolute inset-x-0 bottom-0 h-[clamp(18rem,79.1vw,21.75rem)] md:hidden" />
         <div className="absolute inset-x-0 bottom-0 h-[54%] bg-[radial-gradient(ellipse_85%_89%_at_50%_65%,rgb(255_255_255_/_0.15),transparent_68%)] md:h-[42%] md:bg-[radial-gradient(ellipse_28%_100%_at_50%_100%,rgb(255_255_255_/_0.12),transparent_80%)]" />
       </div>
-      <div className="relative px-5 pt-[213px] md:pt-[194px]">
+      <div className="relative px-5 pt-[213px] md:z-20 md:pt-[194px]">
         <h1 id="hero-title" className="pb-[12.5px] text-[32px] leading-[46.5px] font-bold">{siteConfig.title}</h1>
         <p className="mx-auto max-w-[400px] font-supporting text-xl leading-[20.15px]">{siteConfig.description}</p>
         <div id="download" dir="ltr" tabIndex={-1} aria-label="تحميل التطبيق" className="mx-auto mt-[69px] flex w-fit max-w-full scroll-mt-28 gap-[14px] md:mt-[53px]">
@@ -29,7 +29,7 @@ export function HeroSection() {
       </div>
       {/* Mobile reserves complete devices; desktop reserves the reference bottom region.
           Only the outer Hero boundary crops the desktop artwork. */}
-      <div aria-hidden="true" className="relative mx-auto mt-[93px] aspect-[440/454] w-full max-w-[440px] md:mt-[45px] md:aspect-[426/281] md:max-w-[426px]">
+      <div aria-hidden="true" className="relative mx-auto mt-[93px] aspect-[440/454] w-full max-w-[440px] md:mt-[45px] md:aspect-[426/281] md:max-w-[426px] md:z-0">
         <div className="absolute inset-x-0 bottom-0 hidden aspect-[426/281] origin-top translate-y-2 scale-[1.04] md:top-0 md:bottom-auto md:aspect-auto md:-translate-y-2.5 md:block">
           <Image src="/images/hero/phones.png" alt="" width={2017} height={2048} sizes="444px" className="h-auto w-full" />
         </div>
@@ -40,6 +40,9 @@ export function HeroSection() {
           <Image src="/images/hero/phones.png" alt="" width={2017} height={2048} sizes="(max-width: 440px) 81vw, 356px" className="absolute top-[12.335%] left-[11.4%] h-auto w-[77.72%] max-w-none [clip-path:polygon(49%_0,100%_0,100%_100%,44%_100%,49%_70%)] md:hidden" />
         </div>
       </div>
+      {/* Rectangle 1169: reverse the gradient instead of flipping its geometry.
+          Foreground on desktop only; content remains above this decorative layer. */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-[78.6%] bg-[linear-gradient(to_top,#011C3E_-0.84%,rgba(0,26,59,0)_22.53%)] md:z-10 md:block" />
     </section>
   );
 }
