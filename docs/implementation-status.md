@@ -75,6 +75,15 @@ Baseline: `b229ecbfda9234961ef62cfa01403dd18ee3a8ee`.
 - Production preview started, but browser access again returned `ERR_BLOCKED_BY_CLIENT`. No rendered width, overflow, or visual approval is claimed; desktop crop and mobile glow require local QA.
 - One requested commit: `fix: align hero bottom composition across breakpoints`; verified bundle exported outside the repository. No push, merge or rebase.
 
+## Desktop-only phone position correction — mobile frozen
+
+- Baseline: `d032f3523001df58b6fdc11e79c9f05ea218c4b9`. The desktop `bottom-0` wrapper used a preferred 426:281 aspect ratio with a taller intrinsic image. Content-driven height could move its top upward when anchored to the bottom; the aspect ratio did not explicitly constrain the artwork start.
+- Added only four desktop overrides to that wrapper: `md:top-0`, `md:bottom-auto`, `md:aspect-auto`, `md:-translate-y-2.5`. Its top now follows the normal-flow lower region with a 10px calibration offset, independent of image height. Existing 104% scale is retained. Artwork extends intact beyond the Hero; only the final shell performs the intentional bottom crop.
+- Figma reference is approximately 446 × 452 at top 401px inside a 692px Hero. Calculated current values at desktop widths 768, 1024, 1280 and 1440: phone top 401.15px, width 443.04px, height 449.85px, Hero height 692.15px, badge-to-phone gap 35px, intentional lower crop 158.85px. These calculations assume the existing single-line desktop copy; they are not browser measurements. The Hero flow/height, photography and decorative layers were not changed.
+- Source comparison confirms that removing just the four new `md:` overrides reproduces the baseline component byte-for-byte. Every base/mobile value and all markup remain unchanged, preserving approved behavior at 375, 390, 440 and 446px. SiteHeader.tsx and mobile navigation were not modified.
+- `npm run typecheck`: PASS. `npm run lint`: PASS. `npm run build`: PASS. Browser preview returned `ERR_BLOCKED_BY_CLIENT`; rendered comparison and final visual approval remain with local QA.
+- Exactly one requested commit and a verified external bundle export. No push, merge or rebase.
+
 ## Verification and follow-up
 
 No new dependency, generic replacement artwork, additional marketing section, or remote Figma URL was introduced. The original PNG artwork retains transparency and dimensions; Next Image provides responsive delivery. Background is eager/high priority; content and artwork reserve layout space. Temporary preview harness was removed.

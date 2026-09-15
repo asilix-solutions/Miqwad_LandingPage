@@ -30,7 +30,7 @@ export function HeroSection() {
       {/* Mobile reserves complete devices; desktop reserves the reference bottom region.
           Only the outer Hero boundary crops the desktop artwork. */}
       <div aria-hidden="true" className="relative mx-auto mt-[93px] aspect-[440/454] w-full max-w-[440px] md:mt-[45px] md:aspect-[426/281] md:max-w-[426px]">
-        <div className="absolute inset-x-0 bottom-0 hidden aspect-[426/281] origin-top translate-y-2 scale-[1.04] md:block">
+        <div className="absolute inset-x-0 bottom-0 hidden aspect-[426/281] origin-top translate-y-2 scale-[1.04] md:top-0 md:bottom-auto md:aspect-auto md:-translate-y-2.5 md:block">
           <Image src="/images/hero/phones.png" alt="" width={2017} height={2048} sizes="444px" className="h-auto w-full" />
         </div>
         <div className="absolute inset-0 origin-top translate-y-2 scale-[1.04] md:hidden">
