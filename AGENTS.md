@@ -1,7 +1,7 @@
 # Miqwad public website
 
 - Work only in `asilix-solutions/Miqwad_LandingPage`; inspect repository identity, branch, and existing files before changing anything.
-- Never develop directly on `main`. Current phase branch: `feat/project-foundation-hero`.
+- Never develop directly on `main`. Current phase branch: `feat/header-hero`.
 - Do not merge final PRs without explicit user authorization. Do not create a PR for this phase unless requested.
 - Figma visual intent is authoritative. Follow `docs/figma-source.md`; unrelated product screens are out of scope.
 - Reconstruct visual intent using normal flow, Grid/Flex, responsive containers, and content-driven breakpoints. Never translate canvas coordinates into a fixed page.

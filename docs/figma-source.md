@@ -16,7 +16,7 @@ Home nodes are authoritative for the public landing/home page. Inspect the Home 
 
 Figma determines visual intent, hierarchy, composition, typography, colors, spacing relationships, gradients, and exact artwork. Web standards determine responsive behavior. Do not paste generated coordinate layouts into production.
 
-## Inspected in this phase
+## Inspected during the earlier foundation phase
 
 `get_design_context`: all three Home/menu primary references above. `get_variable_defs`: Desktop Home. No policy or optional Hero detail references inspected.
 
@@ -42,4 +42,19 @@ Typography: IBM Plex Sans Arabic 700 for the 32px Hero title; Tajawal 500 for th
 
 Verified colors: brand `#043168`, accent `#f45e2b`, Hero deep `#011d41`, ink `#01142e`, app background `#f5f6fa`, muted `#a6aabe`, border `#a6aabe4d`, surface white.
 
-Assets must be saved locally before implementation. Never commit MCP asset URLs. See implementation-status.md for the unresolved asset transfer blocker.
+Assets must be saved locally before implementation. Never commit MCP asset URLs. See implementation-status.md for asset provenance and the outstanding browser validation gate.
+
+## Header + Hero attachment authority — 2026-09-15
+
+For this phase, the user explicitly prohibited further Figma MCP calls. The attached implementation brief and original assets supersede the earlier download blocker. No Figma call was made for this implementation.
+
+- Desktop Hero reference: `Hero Section(1).png`, 1280 × 692.
+- Desktop Header reference: `Frame 5991 (1)(1).png`, 1280 × 102.
+- Mobile Hero reference: `Hero section (1)(1).png`, 440 × 956.
+- Open navigation reference: `Frame 5991(1).png`, 440 × 427.
+- Original interior photo: `الداخليه(1).png`, 1672 × 941.
+- Vector logo: `Pasted text (2)(2).txt`, 100 × 36; white artwork with orange accents. Blue version uses identical paths with white fills replaced by the existing brand blue.
+- The three phone SVG wrappers in `Pasted text (3)(2).txt`, `(4)(1).txt`, `(5)(1).txt` contain the same original 2017 × 2048 transparent PNG; extracted once, without committing base64 wrappers.
+- App Store and Google Play SVGs were supplied inline, each duplicated. One vector file per store is used. Desktop clips only surrounding blank padding to fit the observed 120 × 40 containers; mobile uses 160 × 48 originals.
+
+Reference screenshots are comparison inputs only and are not rendered by the website. Header menu/close strokes are CSS control glyphs; proprietary artwork is never recreated. Exact separate menu/close vector files were not included, so those glyphs are an explicit approximation pending visual review.
