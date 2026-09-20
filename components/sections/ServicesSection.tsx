@@ -174,7 +174,7 @@ export function ServicesSection() {
             backgroundImage: "url('/icons/services/services-rings.svg')",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
-            backgroundSize: "112% auto",
+            backgroundSize: "104% auto",
           }}
         >
 
