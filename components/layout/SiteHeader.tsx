@@ -54,7 +54,7 @@ export function SiteHeader() {
         <nav aria-label="التنقل الرئيسي" className="hidden md:block">
           <ul className="flex items-center gap-8 text-base leading-6">
             <li><a href="#hero" aria-current="page">الرئيسية</a></li>
-            <li><span aria-disabled="true" title="هذا القسم غير متاح بعد">الخدمات</span></li>
+            <li><a href="#services">الخدمات</a></li>
             <li><span aria-disabled="true" title="هذا القسم غير متاح بعد">آلية العمل</span></li>
           </ul>
         </nav>

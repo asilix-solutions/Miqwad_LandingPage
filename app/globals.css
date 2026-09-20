@@ -43,4 +43,147 @@
     }
     .hero-fade { background: linear-gradient(to bottom, transparent, #011c3e); }
   }
+
+  /* ── Services section ─────────────────────────────────────────────────── */
+
+  /* Grid row */
+  .services-grid-row {
+  }
+
+  /* Card */
+  .service-card {
+  }
+
+  /* Content container positioned as an absolute stable layer */
+  .service-card-content {
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+    pointer-events: none;
+    color: var(--color-surface);
+  }
+
+  /* Icon Box */
+  .service-card-icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    padding: 0;
+    width: max-content;
+    height: max-content;
+  }
+
+  /* SVG Image — Motion animate is the sole owner of width/height. 
+     CSS only provides max-width override for layout safety. */
+  .service-icon-img {
+    max-width: none;
+  }
+
+  /* Title — Motion animate is sole owner of font-size and line-height.
+     CSS provides font-weight only. */
+  .service-card-title {
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  /* Description Wrapper Reveal */
+  .service-card-desc-wrapper {
+    margin-top: 0.5rem;
+  }
+
+  /* Description Text Interpolation */
+  .service-card-desc {
+    font-family: var(--font-supporting);
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.6;
+    color: rgb(255 255 255 / 0.9);
+  }
+  @media (min-width: 768px) {
+    .service-card:not(.is-mobile) .service-card-desc {
+      font-size: 0.9375rem; /* 15px */
+    }
+  }
+  .service-card[aria-expanded="true"] .service-card-desc {
+    font-size: 0.9375rem; /* 15px */
+  }
+  @media (min-width: 768px) {
+    .service-card[aria-expanded="true"]:not(.is-mobile) .service-card-desc {
+      font-size: 1.0625rem; /* 17px */
+    }
+  }
+
+  /* Expanded Overlay Layer is controlled solely by Motion animate */
+
+  /* ── Decorative concentric dashed rings ─────────────────────────────── */
+  /* Uses SVG background-image for precise dash/gap control.             */
+  /* Absolutely positioned, no layout impact, pointer-events: none.       */
+
+  .services-rings {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: -1;
+  }
+
+  /* Ring 1 (innermost) & Ring 2 via pseudo-elements */
+  .services-rings::before,
+  .services-rings::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* SVG dashed circle: strokeDasharray controls dash+gap */
+    background: none;
+    border: none;
+    /* Use box-shadow trick replaced by SVG background below */
+  }
+
+  /* Ring 1 — ~248px radius (was ~230px, +~8%) */
+  .services-rings::before {
+    width: 500px;
+    height: 500px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'%3E%3Ccircle cx='250' cy='250' r='248' fill='none' stroke='%23a6aabe' stroke-opacity='0.3' stroke-width='1' stroke-dasharray='8 12'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+
+  /* Ring 2 — ~332px radius (was ~310px, +~7%) */
+  .services-rings::after {
+    width: 664px;
+    height: 664px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 664 664'%3E%3Ccircle cx='332' cy='332' r='330' fill='none' stroke='%23a6aabe' stroke-opacity='0.3' stroke-width='1' stroke-dasharray='8 12'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+
+  /* Ring 3 & Ring 4 via background on the container */
+  .services-rings {
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 940 940'%3E%3Ccircle cx='470' cy='470' r='468' fill='none' stroke='%23a6aabe' stroke-opacity='0.3' stroke-width='1' stroke-dasharray='8 12'/%3E%3C/svg%3E") center/940px 940px no-repeat,
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1160 1160'%3E%3Ccircle cx='580' cy='580' r='578' fill='none' stroke='%23a6aabe' stroke-opacity='0.3' stroke-width='1' stroke-dasharray='10 14'/%3E%3C/svg%3E") center/1160px 1160px no-repeat;
+  }
+
+  /* Responsive ring scaling for mobile. */
+  @media (max-width: 767px) {
+    .services-rings::before {
+      width: 390px;
+      height: 390px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 390 390'%3E%3Ccircle cx='195' cy='195' r='193' fill='none' stroke='%23a6aabe' stroke-opacity='0.3' stroke-width='1' stroke-dasharray='6 10'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+    .services-rings::after {
+      width: 558px;
+      height: 558px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 558 558'%3E%3Ccircle cx='279' cy='279' r='277' fill='none' stroke='%23a6aabe' stroke-opacity='0.3' stroke-width='1' stroke-dasharray='6 10'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+    .services-rings {
+      background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 280 280'%3E%3Ccircle cx='140' cy='140' r='138' fill='none' stroke='%23a6aabe' stroke-opacity='0.3' stroke-width='1' stroke-dasharray='6 10'/%3E%3C/svg%3E") center/280px 280px no-repeat,
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 690 690'%3E%3Ccircle cx='345' cy='345' r='343' fill='none' stroke='%23a6aabe' stroke-opacity='0.3' stroke-width='1' stroke-dasharray='6 10'/%3E%3C/svg%3E") center/690px 690px no-repeat;
+    }
+  }
+
+
 }
