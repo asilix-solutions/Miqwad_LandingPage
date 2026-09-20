@@ -21,6 +21,21 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", update);
   }, []);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const href = e.currentTarget.getAttribute("href");
+    if (href && href.startsWith("#")) {
+      const targetId = href.slice(1);
+      const target = document.getElementById(targetId);
+      if (target) {
+        e.preventDefault();
+        setOpen(false);
+        const offset = window.matchMedia("(min-width: 768px)").matches ? 101 : 67;
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: targetPosition, behavior: "smooth" });
+      }
+    }
+  };
+
   useEffect(() => {
     if (!open) return;
     const media = window.matchMedia("(min-width: 768px)");
@@ -52,10 +67,10 @@ export function SiteHeader() {
           <Image src={open ? "/brand/miqwad-blue.svg" : "/brand/miqwad-white.svg"} alt="مقود" width={100} height={36} className="h-9 w-[100px]" />
         </a>
         <nav aria-label="التنقل الرئيسي" className="hidden md:block">
-          <ul className="flex items-center gap-8 text-base leading-6">
-            <li><a href="#hero" aria-current="page">الرئيسية</a></li>
-            <li><a href="#services">الخدمات</a></li>
-            <li><span aria-disabled="true" title="هذا القسم غير متاح بعد">آلية العمل</span></li>
+          <ul className="flex items-center gap-8 text-base font-medium leading-6">
+            <li><a href="#hero" onClick={handleNavClick} aria-current="page">الرئيسية</a></li>
+            <li><a href="#services" onClick={handleNavClick}>الخدمات</a></li>
+            <li><a href="#how-it-works" onClick={handleNavClick}>آلية العمل</a></li>
           </ul>
         </nav>
         <a href="#download" className="hidden h-[35px] w-32 items-center justify-center rounded-control bg-accent text-sm font-medium text-white md:flex">تحميل التطبيق</a>
@@ -65,7 +80,7 @@ export function SiteHeader() {
           <span aria-hidden="true" className={`absolute h-[1.5px] w-5 bg-current ${open ? "-rotate-45" : "translate-y-[6px]"}`} />
         </button>
       </div>
-      {open ? <MobileNavigation onClose={() => setOpen(false)} /> : <div id="mobile-navigation" hidden />}
+      {open ? <MobileNavigation onClose={() => setOpen(false)} onNavClick={handleNavClick} /> : <div id="mobile-navigation" hidden />}
     </header>
   );
 }

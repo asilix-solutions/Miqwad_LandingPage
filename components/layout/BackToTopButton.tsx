@@ -76,7 +76,7 @@ export function BackToTopButton() {
       title="العودة إلى الأعلى"
       tabIndex={isVisible ? undefined : -1}
       aria-hidden={!isVisible}
-      className={`fixed left-[16px] top-[88px] z-40 flex h-[46px] w-[46px] min-h-[46px] min-w-[46px] items-center justify-center rounded-[12px] bg-[#F45E2B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F45E2B]/60 md:left-[24px] md:top-[92px] lg:left-[40px] lg:top-[116px] transition-all motion-reduce:transition-none motion-reduce:transform-none ${
+      className={`fixed left-[16px] bottom-[20px] z-40 flex h-[46px] w-[46px] min-h-[46px] min-w-[46px] items-center justify-center rounded-[12px] bg-[#F45E2B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F45E2B]/60 md:left-[24px] md:bottom-[24px] lg:left-[40px] lg:bottom-[32px] transition-all motion-reduce:transition-none motion-reduce:transform-none ${
         isVisible
           ? "opacity-100 translate-y-0 duration-[200ms] ease-out pointer-events-auto hover:-translate-y-[1px] active:translate-y-[1px]"
           : "opacity-0 translate-y-[6px] duration-[160ms] ease-out pointer-events-none"
