@@ -39,13 +39,13 @@ export function SiteFooter() {
                 <span className="font-sans font-normal text-[14px] leading-[25px] tracking-[0px] text-white/[0.55]">
                   +966 50 248 6502
                 </span>
-                <Image 
-                  src="/icons/footer/phone.svg" 
-                  alt="Phone" 
-                  width={15} 
-                  height={15} 
-                  className="shrink-0" 
-                  unoptimized 
+                <Image
+                  src="/icons/footer/phone.svg"
+                  alt="Phone"
+                  width={15}
+                  height={15}
+                  className="shrink-0"
+                  unoptimized
                 />
               </div>
 

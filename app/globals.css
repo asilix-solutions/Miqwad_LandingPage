@@ -77,7 +77,7 @@
     height: max-content;
   }
 
-  /* SVG Image — Motion animate is the sole owner of width/height. 
+  /* SVG Image — Motion animate is the sole owner of width/height.
      CSS only provides max-width override for layout safety. */
   .service-icon-img {
     max-width: none;

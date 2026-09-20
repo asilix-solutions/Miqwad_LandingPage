@@ -370,8 +370,8 @@ function ServiceCard({
   const isPortrait = variant === "portrait";
 
   const portraitInactiveY = mobile ? 14 : 18;
-  const targetGroupY = isActive 
-    ? (isPortrait ? (mobile ? -45 : -65) : -25) 
+  const targetGroupY = isActive
+    ? (isPortrait ? (mobile ? -45 : -65) : -25)
     : (!showTitle && isPortrait ? portraitInactiveY : 0);
 
   const baseFontSize = mobile ? "1.25rem" : "1.5rem";
@@ -427,7 +427,7 @@ function ServiceCard({
       {/* Content: stable layout area */}
       <div className="service-card-content">
         {/* Center anchor */}
-        <div 
+        <div
           className={`absolute inset-x-0 ${
             variant === "landscape" ? "top-[50%]" : "top-[60%]"
           } -translate-y-1/2 flex flex-col items-center justify-center pointer-events-none`}
@@ -437,8 +437,8 @@ function ServiceCard({
             animate={{ y: targetGroupY }}
             transition={GEOMETRY_TWEEN}
             className={`service-card-primary-content flex items-center justify-center w-full ${
-              variant === "landscape" 
-                ? "flex-row-reverse gap-4 px-4 md:px-6" 
+              variant === "landscape"
+                ? "flex-row-reverse gap-4 px-4 md:px-6"
                 : "flex-col gap-2 md:gap-3 px-2"
             }`}
           >
@@ -509,7 +509,7 @@ function ServiceIcon({ id, isActive, siblingActive, mobile, variant }: { id: Ser
   };
 
   const icon = iconMap[id];
-  
+
   let scaleFactor = 1;
   if (isActive) {
     scaleFactor = mobile ? 0.85 : 1;

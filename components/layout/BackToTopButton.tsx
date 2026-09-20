@@ -35,8 +35,8 @@ export function BackToTopButton() {
   const handleClick = useCallback(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const target = document.getElementById("hero");
-    const targetPosition = target 
-      ? target.getBoundingClientRect().top + window.scrollY 
+    const targetPosition = target
+      ? target.getBoundingClientRect().top + window.scrollY
       : 0;
 
     if (prefersReducedMotion) {
