@@ -170,9 +170,13 @@ export function ServicesSection() {
           id="services"
           aria-labelledby="services-title"
           className="relative isolate overflow-hidden bg-surface py-section"
+          style={{
+            backgroundImage: "url('/icons/services/services-rings.svg')",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            backgroundSize: "112% auto",
+          }}
         >
-      {/* Decorative rings */}
-      <div aria-hidden="true" className="services-rings" />
 
       {/* Heading */}
       <div className="relative mx-auto max-w-site px-5 text-center flex flex-col items-center">
