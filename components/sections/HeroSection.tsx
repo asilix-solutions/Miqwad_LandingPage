@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
+import { HeroPhones } from "./HeroPhones";
 
 const badges = [
   { name: "Google Play", src: "/store-badges/google-play.svg", url: siteConfig.googlePlayUrl },
@@ -30,15 +31,7 @@ export function HeroSection() {
       {/* Mobile reserves complete devices; desktop reserves the reference bottom region.
           Only the outer Hero boundary crops the desktop artwork. */}
       <div aria-hidden="true" className="relative mx-auto mt-[93px] aspect-[440/454] w-full max-w-[440px] md:mt-[45px] md:aspect-[426/281] md:max-w-[426px] md:z-0">
-        <div className="absolute inset-x-0 bottom-0 hidden aspect-[426/281] origin-top translate-y-2 scale-[1.04] md:top-0 md:bottom-auto md:aspect-auto md:-translate-y-2.5 md:block">
-          <Image src="/images/hero/phones.png" alt="" width={2017} height={2048} sizes="444px" className="h-auto w-full" />
-        </div>
-        <div className="absolute inset-0 origin-top translate-y-2 scale-[1.04] md:hidden">
-          {/* These polygons separate the two devices through transparent pixels,
-              retaining their complete silhouettes and intrinsic perspective. */}
-          <Image src="/images/hero/phones.png" alt="" width={2017} height={2048} sizes="(max-width: 440px) 90vw, 396px" className="absolute top-0 left-[8.636%] h-auto w-[86.34%] max-w-none [clip-path:polygon(0_0,49%_0,49%_70%,44%_100%,0_100%)] md:hidden" />
-          <Image src="/images/hero/phones.png" alt="" width={2017} height={2048} sizes="(max-width: 440px) 81vw, 356px" className="absolute top-[12.335%] left-[11.4%] h-auto w-[77.72%] max-w-none [clip-path:polygon(49%_0,100%_0,100%_100%,44%_100%,49%_70%)] md:hidden" />
-        </div>
+        <HeroPhones />
       </div>
       {/* Rectangle 1169: reverse the gradient instead of flipping its geometry.
           Foreground on desktop only; content remains above this decorative layer. */}

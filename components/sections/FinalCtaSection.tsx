@@ -6,7 +6,7 @@ export function FinalCtaSection() {
       id="final-cta"
       aria-labelledby="final-cta-title"
       style={{
-        background: "linear-gradient(180deg, #044088 0%, #01142E 100%)",
+        background: "linear-gradient(180deg, #0E1A45 0%, #1A2A5E 100%)",
       }}
     >
       {/* ── Desktop: CSS Grid guarantees button LEFT / text RIGHT regardless of RTL ── */}
