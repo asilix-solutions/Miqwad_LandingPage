@@ -1,3 +1,80 @@
+# Hero phone float smoothness refinement — user visual QA pending
+
+Date: 2026-09-22. Refined the approved floating effect without changing the Hero composition or other pending work.
+
+- Previously each clipped image also owned its CSS transform animation. That combination is a plausible contributor to the reported micro-jitter; it is not a confirmed browser-profile diagnosis. Static clipping now stays on each inner image and a simple outer `m.div` owns only the animated `y`. `will-change: transform` is limited to these moving wrappers. No translateZ workaround, animated clipping, spring, opacity animation, timers or per-frame React state was added.
+- `HeroPhones.tsx` is the only new client boundary. `HeroSection` remains server-rendered; headings, badges, background/light/fade layers and the outer height-reserving stage remain there unchanged. Original desktop/mobile base container classes, image sizes, clip polygons and the 1.04 scale are retained. Mobile positioning percentages now belong to wrappers of the same dimensions instead of their inner images.
+- Reused the Services import strategy: `import * as m from "motion/react-m"`, `LazyMotion`, `MotionConfig`, `useReducedMotion` and the `Transition` type from `motion/react`; the existing async `@/lib/motion-features` loader is reused unchanged. No dependencies were installed or modified.
+- Motion replaces all former CSS floating keyframes/classes. Phone 1: `[-4, 11, -4]`, 5.6s. Phone 2: `[-3, 12, -3]`, 6s, -1.2s phase delay. Both use tween keyframes at `[0, 0.5, 1]`, cubic-bezier `[0.42, 0, 0.58, 1]`, infinite loop and zero repeat delay. End/start values match and easing reaches zero endpoint velocity, removing a designed discontinuity at the loop boundary. This is not a guarantee against runtime dropped frames.
+- `MotionConfig reducedMotion="user"` plus `useReducedMotion` selects stationary `y: 0`. A reduced-motion CSS override also preserves the base pose before hydration and if OS preferences change; it adds no second animation system.
+- Sequential validation: typecheck and build blocked by `next: not found`, lint blocked by `eslint: not found` (all exit 127; this checkout has no project dependencies). `git diff --check` passed. No browser performance or visual verification is claimed. User QA is required to confirm the reported micro-jitter has actually disappeared. No staging, commit or push.
+
+---
+
+# Hero phone floating polish — user visual QA pending
+
+Date: 2026-09-22. Continued on the existing local `feat/policies-page` branch, preserving all uncommitted Policies/Footer work.
+
+- Added scoped CSS keyframes to the phone artwork only. The Hero remains a Server Component; the existing Services motion setup is unchanged. No dependency, client component, animation listener or render loop was added.
+- Both phones move from -4px to +12px relative to their approved positions, with `ease-in-out` infinite loops of 5.2s and 5.8s; the second uses a -1.4s phase offset. The retained 1.04 parent scale makes the visible range approximately -4.16px to +12.48px. Only `transform: translateY(...)` is animated.
+- Desktop uses two complementary clipped copies of the same original composite PNG, reusing the existing mobile transparent-pixel polygons. The first stays in normal flow and retains the original intrinsic dimensions; the second is absolute. No image asset, base wrapper transform, responsive size, Hero height, gradient, fade, light layer or z-index was changed.
+- Animation is enabled only inside `prefers-reduced-motion: no-preference`; reduced-motion users retain the stationary composition. CSS is scoped to `HeroSection.module.css`.
+- `npm run typecheck`, `npm run lint`, and `npm run build` were run sequentially: all blocked with exit 127 because this checkout still lacks `next`/`eslint` and `node_modules`. No packages were installed. `git diff --check` passed. No successful application build or rendered visual/performance verification is claimed.
+- Manual QA remains required for the desktop split silhouettes, subtle downward-biased motion, mobile lower boundary, unchanged light/fade composition, and reduced-motion behavior. Header, Footer, Services, How It Works, final CTA and Policies are unchanged from the start of this polish. No staging, commit or push.
+
+---
+
+# Policies refinement — five URL-addressable policies and shared Figma Footer
+
+Date: 2026-09-21. Continued on the existing `feat/policies-page` branch without resetting, staging, committing or pushing prior work. This section supersedes the initial Policies report below where scope or design changed.
+
+- The new screenshots `f4220b36-0128-4b2e-a97c-6e2929c1ebda.png` (Footer) and `044ab54e-62d0-477d-9e73-a2d2bba628ad.png` (white Policies surface), together with the refinement brief, override the earlier gray background and Footer freeze. Policies content now uses `#FFFFFF` throughout; the approved Hero typography/spacing is unchanged.
+- The single shared `SiteFooter` now uses `linear-gradient(180deg, #1A2A5E 0%, #0E1A45 100%)` instead of flat `#01142E`. At 1280px, the centered inner width is 1072px and top padding is 72px. Fluid desktop tracks, approximately 186px content height, 56px bottom spacing and a 70px lower row imply roughly 386px total including borders; this is a layout estimate, not a browser measurement or fixed height. Mobile ordering is retained, intermediate widths use flexible columns, and the bottom row wraps as needed.
+- Upper Footer policy links now lead to Privacy, Terms and Returns. Bottom-left Privacy/Terms links are real links, opposite the copyright on desktop. Existing home-section links point to the verified home anchors so they also work from Policies. Social, store and provider destinations remain their existing unverified placeholders.
+- Typed policy data is centralized in `components/policies/content.ts`. Exact destinations: `/policies`, `/policies?policy=terms`, `/policies?policy=returns`, `/policies?policy=shipping`, `/policies?policy=cookies`. The Server Component page awaits `searchParams` and resolves a matching ID; missing, unknown or repeated `policy` values fall back to Privacy. Reading query state makes this route request-rendered rather than the previous static shell; no Next configuration change is needed.
+- Both navigation presentations derive links and the single active item from the same collection. The breadcrumb and “في هذه الصفحة” update to the selected policy. Each of the five policies has nine uniquely prefixed section anchors. The sidebar remains sticky at 125px; mobile remains an RTL, non-wrapping, horizontally scrollable row with keyboard-accessible links.
+- Policy links intentionally use native document navigation to start a newly selected policy at the top, without scroll libraries or client state. The trade-off is a full document navigation on policy changes. Native history/back behavior remains available. In-page links continue to use the existing header-aware scroll margins.
+- `PrivacyPolicyArticle.tsx` was generalized to `PolicyArticle.tsx`; no duplicate policy shells were added. A data comparison against the pre-refinement snapshot confirms that all Privacy sections, text, lists, IDs and support placeholder are unchanged. The other four policies have subject-specific Arabic demo sections/list blocks, explicitly marked `DEMO CONTENT — REPLACE BEFORE PRODUCTION` in source. Only those four show the quiet text “محتوى تجريبي للعرض” near the article metadata. No approved legal status or verified operational commitments are claimed for demo copy.
+- SiteHeader, MobileNavigation, BackToTopButton and PoliciesHero are byte-for-byte unchanged from the beginning of this refinement. Home sections, global styles, assets, fonts, package files and configuration are untouched. No package was installed. The existing patch/bundle/image files were not modified or staged.
+
+Validation, run sequentially:
+
+| Command | Result |
+| --- | --- |
+| `npm run typecheck` | BLOCKED, exit 127: `next: not found`. |
+| `npm run lint` | BLOCKED, exit 127: `eslint: not found`. |
+| `npm run build` | BLOCKED, exit 127: `next: not found`. |
+| `git diff --check` | PASS. |
+
+The user's local dependencies are reported installed; this separate checkout still has no `node_modules`. The official Next.js page/searchParams reference was consulted because installed docs were unavailable. Additional terminal checks passed for syntax transpilation, exact Privacy preservation, 45 unique section IDs, policy URLs/fallbacks/demo flags, and protected-file preservation. These checks do not replace the repository typecheck/lint/build or browser QA. No browser automation or visual-pass claim was made. User review remains required across all five URLs, refresh/direct links, policy switching from deep scroll positions, mobile overflow/active tabs, section anchors, Footer links/gradient and homepage/Footer responsiveness at 320–1440px. No commit, push, PR, merge or rebase.
+
+---
+
+# Policies page — implementation ready for local validation and user visual QA
+
+Date: 2026-09-21. Branch: `feat/policies-page`, created from fetched `origin/main` at `6bb26ed7e21c2eb332d977d0b957bf8b6fd08285`. The historical reports below describe earlier phases, not current validation results.
+
+- References: attached `Policies.png` (desktop), `Miqwad Website Mobile.png`, and the desktop/mobile prototype videos ending `09-38-35.mp4` and `09-42-02.mp4`. Existing fonts, tokens and shared components were reused. Figma MCP was unavailable; the user's explicit screenshot/video fallback authorized proceeding without exact node measurements. No browser automation or generated application screenshots were used.
+- `/policies` is a Server Component route with Arabic page metadata, light `#F5F6FA` surface, the existing IBM fonts, responsive heading, update/scope metadata, and all nine privacy sections transcribed from the desktop reference. The mobile reference abbreviates the article; all nine sections remain available on every screen size as explicitly requested.
+- Desktop uses a centered, fluid RTL grid with a 280px right sidebar and a flexible article. At 1024px and above, the sidebar is sticky at 125px (101px Header plus 24px), constrained by the content grid. Its viewport-limited height allows scrolling on short screens without covering the Footer. Below 1024px it becomes a single-row, horizontally scrollable policy strip with keyboard focus and no dropdown. Native section anchors have 91px/125px scroll margins for the 67px/101px Header.
+- Policy labels and article sections are centralized. Only Privacy is implemented; other policies are intentionally non-interactive labels. No new legal policies or support email were invented. The reference's `[بريد الدعم الإلكتروني]` remains non-interactive orange text until a real address is supplied. This is the only unresolved destination in the supplied privacy copy.
+- `SiteHeader` adds a typed `solid` appearance and home-prefixed section links for internal pages. Its default overlay, existing smooth scrolling and mobile-menu handling remain unchanged. `SiteFooter` is reused byte-for-byte. Its existing non-linked policy labels and same-page navigation destinations remain baseline limitations; no Footer edits were authorized.
+- `BackToTopButton` keeps the home Hero observer and all existing styling/animation. On pages without `#hero`, a passive scroll listener shows it after 320px and the existing handler returns to the top.
+- Homepage composition, Hero, Services, How It Works, final CTA, global CSS, fonts, assets (including Services rings), package files and configuration are unchanged. No dependency was installed. Source retrieval used a sparse checkout excluding `public/images/`; those tracked assets remain unchanged in Git. The Policies page itself uses the existing locally available logos/store/social SVGs.
+
+Validation, run sequentially in this checkout:
+
+| Command | Result |
+| --- | --- |
+| `npm run typecheck` | BLOCKED: exit 127, `next: not found`; dependencies are absent. |
+| `npm run lint` | BLOCKED: exit 127, `eslint: not found`; dependencies are absent. |
+| `npm run build` | BLOCKED: exit 127, `next: not found`; dependencies are absent. |
+| `git diff --check` | PASS. |
+
+The installed Next.js docs required by AGENTS were unavailable with `node_modules`; official Next.js App Router page/metadata documentation was consulted instead. No application typecheck, lint, build, hydration, or visual pass is claimed. Re-run the three repository commands in the user's dependency-ready checkout, then manually review `/policies` at 320, 360, 390, 430, 768, 1024, 1280 and 1440px, including RTL overflow, tabs, section anchors, sticky boundary near Footer, short viewport heights, keyboard/menu interactions, and unchanged home Header behavior. No commit, push, PR, merge or rebase was performed.
+
+---
+
 # Header + Hero — implemented, browser validation pending
 
 Date: 2026-09-15. This report supersedes the earlier asset-transfer blocker; the historical foundation report is retained below.

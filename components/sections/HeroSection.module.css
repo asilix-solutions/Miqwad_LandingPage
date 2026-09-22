@@ -1,0 +1,13 @@
+/* One group-level y owner per responsive composition; inner artwork stays static. */
+@media (prefers-reduced-motion: no-preference) {
+  .composition {
+    will-change: transform;
+  }
+}
+
+/* Also enforce the base position before hydration and on OS preference changes. */
+@media (prefers-reduced-motion: reduce) {
+  .composition {
+    transform: none !important;
+  }
+}

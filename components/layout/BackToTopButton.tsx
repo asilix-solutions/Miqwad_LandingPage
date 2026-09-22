@@ -9,8 +9,10 @@ export function BackToTopButton() {
   useEffect(() => {
     const hero = document.getElementById("hero");
     if (!hero) {
-      console.warn("BackToTopButton: #hero section not found for visibility boundary.");
-      return;
+      const update = () => setIsVisible(window.scrollY > 320);
+      update();
+      window.addEventListener("scroll", update, { passive: true });
+      return () => window.removeEventListener("scroll", update);
     }
 
     const observer = new IntersectionObserver(
