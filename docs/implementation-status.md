@@ -1,3 +1,17 @@
+# Mobile app association files — 2026-10-01
+
+- Base: `origin/main` at `0c7f14141b50f6efd7f73af30a6b5ddcca7cd96e`.
+- Android App Links: `https://miqwad-landingpage.onrender.com/.well-known/assetlinks.json`, package `com.asilix.miqwad`. The mobile team's supplied signing fingerprint is preserved exactly in that file.
+- iOS Universal Links: `https://miqwad-landingpage.onrender.com/.well-known/apple-app-site-association` (no filename extension), appID `X77PF6KFWQ.com.asilix.miqwad`.
+- Apple paths, in the supplied order: `/products/*`, `/scraps/*`, `/workshops/*`, `*`. The final wildcard is intentional per the mobile team's contract; it is not limited to the three preceding paths.
+- Both files are served directly from `public/.well-known/`, with explicit `Content-Type: application/json` headers in `next.config.ts`. Existing image configuration is retained. No redirect, rewrite, middleware or Render configuration was added.
+- Mobile-team fallback formats: `miqwad://products/{id}`, `miqwad://scraps/{id}`, `miqwad://workshops/{id}`. No existing Open-in-App interaction was found, so no UI or link was changed. These schemes do not replace the HTTPS associations or add web detail routes.
+- Local validation: `npm ci`, typecheck, lint, production build and diff-check pass. The built app started with `npm run start -- --hostname 127.0.0.1 --port 3107`; both exact endpoints returned HTTP 200, `application/json`, byte-identical JSON and no `Location` header with redirect following disabled. npm reported existing ESLint peer-range and `http-proxy` warnings; no dependency or lockfile was changed.
+- After Render redeploy, verify both exact HTTPS URLs return HTTP 200 and the expected JSON with `Content-Type: application/json`, no `Location` header and no redirect/HTML fallback. Render dashboard routing settings are not represented in this repository; local serving checks cannot prove deployed behavior.
+- Device-level Android/iOS link opening still needs mobile-team QA with the correctly signed app and associated-domain/intent-filter configuration. No production deployment or device verification is claimed by this patch.
+
+---
+
 # Hero phone float smoothness refinement — user visual QA pending
 
 Date: 2026-09-22. Refined the approved floating effect without changing the Hero composition or other pending work.
