@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.asilix.miqwad",
+      "sha256_cert_fingerprints": [
+        "91:1A:B0:E7:4C:de:D4:CA:16:04:86:65:66:0B:AA:2F:E9:08:21:34:23:D0:AF:14:2C:14:C9:51:27:90:FA:9A"
+      ]
+    }
+  }
+]
